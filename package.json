@@ -1,0 +1,9 @@
+{
+  "name": "itter",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-ts": "^5.4.0"
+  }
+}
