@@ -1,0 +1,108 @@
+{
+  "_meta": {
+    "ID": "da44b33f-37c2-488d-9e13-d78027120d36",
+    "name": "Package",
+    "isTechnical": false,
+    "path": "Mobile_Offer_Template/Package/Product/Launch_Entity",
+    "OmniformName": "Mobile_Offer_Template",
+    "BusinessID": "003025"
+  },
+  "Effective_Start_Date": "2015-11-02T00:00:00.000",
+  "Available_Start_Date": "2015-11-02T00:00:00.000",
+  "Effective_End_Date": null,
+  "Available_End_Date": null,
+  "Element_Guid": "da44b33f-37c2-488d-9e13-d78027120d36",
+  "Element_Type_Guid": "7a577973-ba33-48cd-9c1a-cec733893db2",
+  "Business_ID": "003025",
+  "Name": "D-02238 - SingleMobilePackage",
+  "Description": null,
+  "Category_ID": "11",
+  "Max_Cust_Portfolio_Instances": null,
+  "Min_Cust_Portfolio_Instances": null,
+  "Product_To_Product": [
+    {
+      "_meta": {
+        "ID": "d672ae15-313d-4ae2-a06f-abdd82589800",
+        "name": "Relation_Entity",
+        "isTechnical": false,
+        "path": "Product_Relation/Relation_Entity",
+        "OmniformName": "Product_Relation",
+        "SchemaElementGuid": "8c2ef1fc-b375-4fa1-9d84-3634d1935560",
+        "IsDependent": false,
+        "DependentDataKind": ""
+      },
+      "Association_Start_Date": "2015-11-02T00:00:00.000",
+      "Association_End_Date": null,
+      "Max_Occurs": "1",
+      "Min_Occurs": "0",
+      "Default_Cardinality": null,
+      "Product": {
+        "_meta": {
+          "ID": "cc52ef62-a742-471d-8595-fa8bd208bd68",
+          "name": "Component",
+          "isTechnical": false,
+          "path": "Mobile_Product_Specification_Template/Product_Specification/Product_Component/Component/Product/Launch_Entity",
+          "OmniformName": "Mobile_Product_Specification_Template",
+          "BusinessID": "003017",
+          "SchemaElementGuid": "5fb99f6c-7036-40df-bf67-3666336fcf30",
+          "IsDependent": false,
+          "DependentDataKind": ""
+        },
+        "Effective_Start_Date": "2015-11-02T00:00:00.000",
+        "Available_Start_Date": "2015-11-02T00:00:00.000",
+        "Effective_End_Date": null,
+        "Available_End_Date": null,
+        "Element_Guid": "cc52ef62-a742-471d-8595-fa8bd208bd68",
+        "Element_Type_Guid": "fc3e4dc2-a448-4b54-b4b7-1896d6fffb2e",
+        "Business_ID": "003017",
+        "Name": "D-02238 - Iphone",
+        "Description": null,
+        "Category_ID": "46",
+        "Max_Cust_Portfolio_Instances": null,
+        "Min_Cust_Portfolio_Instances": null
+      }
+    },
+    {
+      "_meta": {
+        "ID": "e453578f-e1e1-45c8-a273-00b1ed99b8f9",
+        "name": "Relation_Entity",
+        "isTechnical": false,
+        "path": "Product_Relation/Relation_Entity",
+        "OmniformName": "Product_Relation",
+        "SchemaElementGuid": "8c2ef1fc-b375-4fa1-9d84-3634d1935560",
+        "IsDependent": false,
+        "DependentDataKind": ""
+      },
+      "Association_Start_Date": "2015-11-02T00:00:00.000",
+      "Association_End_Date": null,
+      "Max_Occurs": "1",
+      "Min_Occurs": "0",
+      "Default_Cardinality": null,
+      "Product": {
+        "_meta": {
+          "ID": "9a326372-13f3-420a-be64-1355e2b66061",
+          "name": "Component",
+          "isTechnical": false,
+          "path": "Mobile_Product_Specification_Template/Product_Specification/Product_Component/Component/Product/Launch_Entity",
+          "OmniformName": "Mobile_Product_Specification_Template",
+          "BusinessID": "003018",
+          "SchemaElementGuid": "5fb99f6c-7036-40df-bf67-3666336fcf30",
+          "IsDependent": false,
+          "DependentDataKind": ""
+        },
+        "Effective_Start_Date": "2015-11-02T00:00:00.000",
+        "Available_Start_Date": "2015-11-02T00:00:00.000",
+        "Effective_End_Date": null,
+        "Available_End_Date": null,
+        "Element_Guid": "9a326372-13f3-420a-be64-1355e2b66061",
+        "Element_Type_Guid": "fc3e4dc2-a448-4b54-b4b7-1896d6fffb2e",
+        "Business_ID": "003018",
+        "Name": "D-02238 - Samsung",
+        "Description": null,
+        "Category_ID": "46",
+        "Max_Cust_Portfolio_Instances": null,
+        "Min_Cust_Portfolio_Instances": null
+      }
+    }
+  ]
+}

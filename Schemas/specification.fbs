@@ -1,0 +1,42 @@
+namespace Specification;
+
+table Product
+{
+    _meta: Meta;
+    Effective_Start_Date: string;
+    Available_Start_Date: string;
+    Effective_End_Date: string;
+    Available_End_Date: string;
+    Element_Guid: string;
+    Element_Type_Guid: string;
+    Business_ID: string;
+    Name: string;
+    Description: string;
+    Category_ID: string;
+    Max_Cust_Portfolio_Instances: string;
+    Min_Cust_Portfolio_Instances: string;
+    Product_To_Product: [Product_To_Product];
+}
+
+table Meta
+{
+    ID: string;
+    name: string;
+    isTechnical: bool;
+    path: string;
+    OmniformName: string;
+    BusinessID: string;
+}
+
+table Product_To_Product
+{
+    _meta: Meta;
+    Association_Start_Date: string;
+    Association_End_Date: string;
+    Max_Occurs: string;
+    Min_Occurs: string;
+    Default_Cardinality: string;
+    Product: [Product];
+}
+
+root_type Product;
