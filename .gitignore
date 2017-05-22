@@ -6,3 +6,4 @@ results.txt
 .tscache
 !gruntfile.js
 !**/typings/**/*.d.ts
+!**/schemas/**/*.js

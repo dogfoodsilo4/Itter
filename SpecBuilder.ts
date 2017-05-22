@@ -29,7 +29,10 @@ class SpecBuilder
             if (product.Product_To_Product) {
                 productToProduct = this.BuildProductToProducts(product.Product_To_Product);
             }
-
+            let mappingRules;
+            if(product.MappingRules){
+                mappingRules = this.BuildMappingRules(product.MappingRules);
+            }
             let Effective_Start_Date = this.SafeString(product.Effective_Start_Date);
             let Available_Start_Date = this.SafeString(product.Available_Start_Date);
             let Effective_End_Date = this.SafeString(product.Effective_End_Date);
@@ -61,6 +64,7 @@ class SpecBuilder
             Specification.Product.addMinCustPortfolioInstances(this.builder, Min_Cust_Portfolio_Instances);
 
             Specification.Product.addProductToProduct(this.builder, productToProduct);
+            Specification.Product.addMappingRules(this.builder, mappingRules);
 
             fbProduct = Specification.Product.endProduct(this.builder);
         }
@@ -99,12 +103,16 @@ class SpecBuilder
         let fbProductToProducts = [];
         if (productToProducts)
         {
-            productToProducts.forEach(function (productToProduct)
+            if (!Array.isArray(productToProducts))
+            {
+                productToProducts = this.asArray(productToProducts);
+            }
+            productToProducts.forEach((productToProduct: any)=>
             {
 
                 let meta = _this.BuildMeta(productToProduct._meta);
 
-                // TODO: Add any sub products here
+                let product = _this.BuildProduct(productToProduct.Product);
 
                 let Association_Start_Date = _this.SafeString(productToProduct.Association_Start_Date);
                 let Association_End_Date = _this.SafeString(productToProduct.Association_End_Date);
@@ -120,6 +128,7 @@ class SpecBuilder
                 Specification.Product_To_Product.addMaxOccurs(_this.builder, Max_Occurs);
                 Specification.Product_To_Product.addMinOccurs(_this.builder, Min_Occurs);
                 Specification.Product_To_Product.addDefaultCardinality(_this.builder, Default_Cardinality);
+                Specification.Product_To_Product.addProduct(_this.builder, product);
 
                 fbProductToProducts.push(Specification.Product_To_Product.endProduct_To_Product(_this.builder));
             });
@@ -128,12 +137,145 @@ class SpecBuilder
         return Specification.Product.createProductToProductVector(this.builder, fbProductToProducts);
     }
 
+    private BuildExists(exists: any): any
+    {
+        let fbExists= [];
+        if (!Array.isArray(exists))
+        {
+            exists = this.asArray(exists);
+        }
+        exists.forEach((exist:any) => {
+                let meta = this.BuildMeta(exist._meta);
+                let entity = this.SafeString(exist.Entity);
+
+                Specification.Exists.startExists(this.builder);
+
+                Specification.Exists.add_meta(this.builder, meta);
+                Specification.Exists.addEntity(this.builder, entity);
+
+                fbExists.push(Specification.Exists.endExists(this.builder));
+        });
+        return Specification.Conditions.createExistsVector(this.builder, fbExists);
+    }
+    private BuildScope(scope: any): any
+    {
+        let meta = this.BuildMeta(scope._meta);
+        let name = this.SafeString(scope.Name);
+        let description = this.SafeString(scope.Description);
+        let seq = this.SafeString(scope.Seq)
+
+        Specification.Scope.startScope(this.builder);
+
+        Specification.Scope.add_meta(this.builder, meta);
+        Specification.Scope.addName(this.builder, name);
+        Specification.Scope.addDescription(this.builder, description);
+        Specification.Scope.addSeq(this.builder, seq);
+
+        return Specification.Scope.endScope(this.builder);
+    }
+    private BuildConditions (conditions: any): any
+    {
+        let meta = this.BuildMeta(conditions._meta);
+        let exists;
+        if(conditions.Exists){
+         exists = this.BuildExists(conditions.Exists);
+        }
+        let scope;
+        if(conditions.Scope)
+        {
+            scope = this.BuildScope(conditions.Scope);
+        }
+        Specification.Conditions.startConditions(this.builder);
+
+        Specification.Conditions.add_meta(this.builder, meta);
+        Specification.Conditions.addExists(this.builder, exists);
+        Specification.Conditions.addScope(this.builder, scope);
+
+        return Specification.Conditions.endConditions(this.builder);
+    }
+    private BuildActions(actions: any): any
+    {
+        let meta = this.BuildMeta(actions._meta);
+        let name = this.SafeString(actions.Name);
+        let sequence = this.SafeString(actions.Sequence);
+        let target = this.SafeString(actions.Target);
+
+        Specification.Actions.startActions(this.builder);
+
+        Specification.Actions.add_meta(this.builder, meta);
+        Specification.Actions.addName(this.builder, name);
+        Specification.Actions.addSequence(this.builder, sequence);
+        Specification.Actions.addTarget(this.builder, target);
+
+        return Specification.Actions.endActions(this.builder);
+    }
+    private BuildTriggerEvents (triggerEvents: any)
+    {
+        let meta = this.BuildMeta(triggerEvents._meta);
+        let name = this.SafeString(triggerEvents.Name);
+
+        Specification.TriggerEvents.startTriggerEvents(this.builder);
+
+        Specification.TriggerEvents.add_meta(this.builder, meta);
+        Specification.TriggerEvents.addName(this.builder, name);
+
+        return Specification.TriggerEvents.endTriggerEvents(this.builder);
+    }
+
+    private BuildMappingRules(mappingRules: any): any
+    {
+        let fbmappingRuless = [];
+        if (mappingRules)
+        {
+            if(!Array.isArray(mappingRules))
+            {
+                mappingRules = this.asArray(mappingRules);
+            }
+            mappingRules.forEach((mappingRule: any) =>
+            {
+                let meta = this.BuildMeta(mappingRule._meta);
+
+                let name = this.SafeString(mappingRule.Name);
+                let sequence = this.SafeString(mappingRule.Sequence);
+                let conditions;
+                if(mappingRule.Conditions)
+                {
+                   conditions = this.BuildConditions(mappingRule.Conditions);
+                }
+                let triggerEvents = this.BuildTriggerEvents(mappingRule.TriggerEvents);
+                let actions = this.BuildActions(mappingRule.Actions);
+
+                Specification.MappingRules.startMappingRules(this.builder);
+
+                Specification.MappingRules.add_meta(this.builder, meta);
+                Specification.MappingRules.addName(this.builder, name);
+                Specification.MappingRules.addSequence(this.builder, sequence);
+                Specification.MappingRules.addConditions(this.builder,conditions);
+                Specification.MappingRules.addTriggerEvents(this.builder, triggerEvents);
+                Specification.MappingRules.addActions(this.builder, actions);
+
+                fbmappingRuless.push(Specification.MappingRules.endMappingRules(this.builder));
+            });
+        }
+
+        return Specification.Product.createMappingRulesVector(this.builder, fbmappingRuless);
+
+    }
+
     private SafeString(str: string): string
     {
         if (!str) {
             return null;
         }
         return this.builder.createString(str);
+    }
+
+    private asArray(x : any): any[]
+    {
+        if (!x) {
+            return [];
+        }
+        return [].concat.apply([], [x]);
     }
 }
 export = SpecBuilder;

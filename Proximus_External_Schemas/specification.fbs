@@ -1,0 +1,108 @@
+namespace Specification;
+
+table Product
+{
+    _meta: Meta;
+    Effective_Start_Date: string;
+    Available_Start_Date: string;
+    Element_Guid: string;
+    Element_Type_Guid: string;
+    Business_ID: string;
+    Name: string;
+    Description: string;
+    Category_ID: string;
+    Name_in_Dutch: string;
+    Description_in_Dutch: string;
+    Description_in_French: string;
+    Description_in_German: string;
+    Name_in_French: string;
+    Name_in_German: string;
+    Email_Required: string;
+    Attachment_Required: string;
+    Installation_Identifier_Required: string;
+    Commercial_Name_in_English: string;
+    Commercial_Name_in_French: string;
+    Commercial_Name_in_Dutch: string;
+    Commercial_Name_in_German: string;
+    Business_Code: string;
+    Is_Sellable_Standalone: string;
+    MappingRules: [MappingRules];
+    Product_To_Product: [Product_To_Product];
+    COM_Classification: [COM_Classification];
+    Product_Line_Classification: [COM_Classification];
+    Market_Segment_Classification: [COM_Classification];
+    Sales_Channel_Classification: [COM_Classification];
+}
+
+table Meta
+{
+    ID: string;
+    Pattern: string;
+    Path: string;
+    xsi_type: string;
+    BusinessID: string;
+}
+
+table Product_To_Product
+{
+    _meta: Meta;
+    Association_Start_Date: string;
+    Max_Occurs: string;
+    Min_Occurs: string;
+    Default_Cardinality: string;
+    Product: Product;
+}
+table Parent
+{
+    _meta: Meta;
+    Name: string;
+    Code: string;
+}
+table COM_Classification
+{
+    _meta: Meta;
+    Name: string;
+    Code: string;
+    Parent: [Parent];
+}
+table Exists
+{
+    _meta: Meta;
+    Entity: string;
+}
+table Scope
+{
+    _meta: Meta;
+    Name: string;
+    Description: string;
+    seq: string;
+}
+table Conditions
+{
+    _meta: Meta;
+    Name: string;
+    Exists: [Exists];
+    Scope: [Scope];
+}
+table TriggerEvents
+{
+    _meta: Meta;
+    Name: string;
+}
+table Actions
+{
+    _meta: Meta;
+    Name: string;
+    Sequence: string;
+    Target: string;
+}
+table MappingRules
+{
+    _meta : Meta;
+    Name: string;
+    Sequence: string;
+    Conditions: [Conditions];
+    TriggerEvents: [TriggerEvents];
+    Actions: [Actions];
+}
+root_type Product;

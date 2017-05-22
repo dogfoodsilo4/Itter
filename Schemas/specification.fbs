@@ -15,6 +15,7 @@ table Product
     Category_ID: string;
     Max_Cust_Portfolio_Instances: string;
     Min_Cust_Portfolio_Instances: string;
+    MappingRules: [MappingRules];
     Product_To_Product: [Product_To_Product];
 }
 
@@ -36,7 +37,47 @@ table Product_To_Product
     Max_Occurs: string;
     Min_Occurs: string;
     Default_Cardinality: string;
-    Product: [Product];
+    Product: Product;
+}
+table Exists
+{
+    _meta: Meta;
+    Entity: string;
+}
+table Scope
+{
+    _meta: Meta;
+    Name: string;
+    Description: string;
+    Seq: string;
+}
+table Conditions
+{
+    _meta: Meta;
+    Name: string;
+    Exists: [Exists];
+    Scope: Scope;
+}
+table TriggerEvents
+{
+    _meta: Meta;
+    Name: string;
+}
+table Actions
+{
+    _meta: Meta;
+    Name: string;
+    Sequence: string;
+    Target: string;
+}
+table MappingRules
+{
+    _meta : Meta;
+    Name: string;
+    Sequence: string;
+    Conditions: Conditions;
+    TriggerEvents: TriggerEvents;
+    Actions: Actions;
 }
 
 root_type Product;

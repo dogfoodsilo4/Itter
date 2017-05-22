@@ -5,7 +5,8 @@
     "chai": "^3.5.0",
     "grunt": "^1.0.1",
     "grunt-mocha-test": "^0.12.7",
-    "grunt-ts": "^5.4.0"
+    "grunt-ts": "^5.4.0",
+    "mocha": "^3.3.0"
   },
   "dependencies": {
     "flatbuffers": "^1.6.0"
