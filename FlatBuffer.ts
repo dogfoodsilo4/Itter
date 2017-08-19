@@ -37,7 +37,6 @@ class FlatBuffer
 
         plog.End();
 
-
     //    console.timeEnd("Read JSON from disk");
 
             // Assert that the JSON data has the correct data for testSpec.json
@@ -49,7 +48,6 @@ class FlatBuffer
             console.log("=SG==> specJson1.Product_To_Product[1]._meta.ID: " + specJson1.Product_To_Product[1]._meta.ID);
             console.log("=SG==> specJson1.Product_To_Product[1].Product._meta.ID: " + specJson1.Product_To_Product[1].Product._meta.ID);
             console.log("=SG==> specJson1.Product_To_Product[1].Product.Business_ID: " + specJson1.Product_To_Product[1].Product.Business_ID);*/
-
 
         //console.time("Build a FlatBuffer");
 
@@ -66,7 +64,6 @@ class FlatBuffer
         //console.time("Write FlatBuffer to disk");
 
         plog.Log("Starting of Writing Flat buffers to disk");
-
 
         fs.writeFileSync("w:\\Work\\itter\\test\\files\\testFB1.dat", new Buffer(buffer));
 
@@ -137,7 +134,6 @@ class FlatBuffer
            let mappingRule_Grandchild1 = GrandChild1_Child24_product11.Product().MappingRules(0);
            console.log("=SG==> mappingRule_1122Grey.Name(): " + mappingRule_Grandchild1.Name());
             console.log("=SG==> mappingRule_1122Grey.Name(): " + mappingRule_Grandchild1.Meta().ID()); */
-
 
         return true;
     }
