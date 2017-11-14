@@ -19,11 +19,67 @@ module.exports = function(grunt) {
                 },
                 src: ['test/**/*.js']
             }
+        },
+        env:
+        {
+            coverage:
+            {
+                APP_DIR_FOR_CODE_COVERAGE: 'test/coverage/instrument/app'
+            }
+        },
+        clean: ['test/coverage'],
+        reloadTasks:
+        {
+            rootPath: 'test/coverage/instrument'
+        },
+        instrument:
+        {
+            files: 'Itter.js',
+            options:
+            {
+                lazy: true,
+                basePath: 'test/coverage/instrument/'
+            }
+        },
+        // mochaTest:
+        // {
+        //     options:
+        //     {
+        //         reporter: 'spec'
+        //     },
+        //     src: ['test/*.js']
+        // },
+        storeCoverage:
+        {
+            options:
+            {
+                dir: 'test/coverage/reports'
+            }
+        },
+        makeReport:
+        {
+            src: 'test/coverage/reports/**/*.json',
+            options:
+            {
+                type: 'lcov',
+                dir: 'test/coverage/reports',
+                print: 'detail'
+            }
         }
     });
 
-    grunt.loadNpmTasks("grunt-ts");
-    grunt.loadNpmTasks('grunt-mocha-test');
+   grunt.loadNpmTasks("grunt-ts");
+   grunt.loadNpmTasks('grunt-mocha-test');
+   grunt.loadNpmTasks('grunt-env');
+   grunt.loadNpmTasks('grunt-istanbul');
+   grunt.loadNpmTasks('grunt-contrib-clean');
+
+    // require('matchdep').filterDev('grunt-*')
+    // .forEach(grunt.loadNpmTasks);
+
+    grunt.registerTask('coverage', ['env:coverage', 'clean', 'instrument', 'reloadTasks', 'mochaTest',
+    'storeCoverage', 'makeReport'
+]);
 
     grunt.registerTask("default", ["ts", "mochaTest"]);
 };

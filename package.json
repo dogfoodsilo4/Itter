@@ -4,6 +4,9 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-env": "^0.4.4",
+    "grunt-istanbul": "^0.8.0",
     "grunt-mocha-test": "^0.12.7",
     "grunt-ts": "^5.4.0",
     "mocha": "^3.3.0"

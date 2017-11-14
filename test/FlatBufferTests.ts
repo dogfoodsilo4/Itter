@@ -9,7 +9,7 @@ import FlatBuffer = require('../FlatBuffer');
 */
 describe("FlatBuffer Buffer()", () => {
 
-    it.only("should build, read & write a valid flatbuffer from a json specification", (done) =>
+    it("should build, read & write a valid flatbuffer from a json specification", (done) =>
     {
         chai.expect(FlatBuffer.Buffer("w:\\Work\\itter\\test\\files\\Proximus.json")).to.be.true;
         //chai.expect(FlatBuffer.Buffer("w:\\Work\\itter\\test\\files\\testSpec.json")).to.be.true;

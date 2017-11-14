@@ -8,7 +8,7 @@ import It = require('../Itter');
 /**
 * These tests cover the basics
 */
-describe("It", function() {
+describe.only("It", function() {
 
     it("should welcome you cheerily", function (done)
     {
